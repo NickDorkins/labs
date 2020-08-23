@@ -1,0 +1,15 @@
+html {
+  background-color: orange;
+}
+
+img {
+  height: 300px;
+  width: 300px;
+  padding: 0px 10px;
+}
+#imageBlock {
+  width: 970px;
+  background-color: blue;
+  margin: 0px auto;
+  margin-top: 50px;
+}

@@ -116,43 +116,4 @@ imgElThree.addEventListener('click', eventHandler);
 
 renderImages();
 
-// imgElOne.removeEventListener
 
-// // Incriments Click of images
-// function eventHandler(e) {
-//   console.log(e.target.alt);
-//   for (var i = 0; i < imgArray.length; i++) {
-//     console.log('INSIDE FOR LOOP', imgArray[i]);
-//     if (imgArray[i].name === e.target.alt) {
-//       imgArray[i].clicked++;
-//       renderImages();
-//     }
-//   }
-// }
-
-
-
-// function renderImages() {
-//   // DOM manipulation fill element with content
-//   var imgOne = imgArray[randomNumber(imgArray.length)];
-//   var imgTwo = imgArray[randomNumber(imgArray.length)];
-//   var imgThree = imgArray[randomNumber(imgArray.length)];
-
-//   while(imgOne === imgTwo) {
-//     imgTwo = imgArray[randomNumber(imgArray.length)];
-//   }
-
-//   imgElOne.src = imgOne.src;
-//   imgElTwo.src = imgTwo.src;
-//   imgElThree.src = imgThree.src;
-
-//   imgElOne.alt = imgOne.name;
-//   imgElTwo.alt = imgTwo.name;
-//   imgElThree.alt = imgThree.name;
-
-//   imgOne.viewed++;
-//   imgTwo.viewed++;
-//   imgThree.viewed++;
-
-//   console.log('IMAGE ARRAY', imgArray);
-// }

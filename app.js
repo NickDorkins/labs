@@ -6,6 +6,12 @@ var imgElOne = document.getElementById('image-one');
 var imgElTwo = document.getElementById('image-two');
 var imgElThree = document.getElementById('image-three');
 
+var clicksAlotted = 25;
+var userClicks = 0;
+var renderArray = [];
+
+var results = document.getElementById('results');
+
 // create Pictures
 
 function Picture(name, src) {
@@ -37,65 +43,116 @@ new Picture('canned unicorn meat', './img/unicorn.jpg');
 new Picture('moving tenticle usb', './img/usb.gif');
 new Picture('self filling watering can', './img/water-can.jpg');
 new Picture('worst wine glass ever', './img/wine-glass.jpg');
-// new Picture('', './img/.jpg');
-// new Picture('', './img/.jpg');
-// new Picture('', './img/.jpg');
-// new Picture('', './img/.jpg');
-// new Picture('', './img/.jpg');
-
-
 
 
 console.log(imgArray);
 
-function renderImages() {
-  // DOM manipulation fill element with content
-  var imgOne = imgArray[randomNumber(imgArray.length)];
-  var imgTwo = imgArray[randomNumber(imgArray.length)];
-  var imgThree = imgArray[randomNumber(imgArray.length)];
+function randomNumber(max) {
+  return Math.floor(Math.random() * max);
+}
 
-  while(imgOne === imgTwo) {
-    imgTwo = imgArray[randomNumber(imgArray.length)];
+function createRenderArray() {
+  while (renderArray.length > 0) {
+    renderArray.pop();
   }
+  while (renderArray.length < 3) {
+    var i = randomNumber(imgArray.length);
+    while (renderArray.includes(i)) {
+      i = randomNumber(imgArray.length);
+    }
+    renderArray.push(i);
+  }
+  console.log(renderArray);
+}
 
-  imgElOne.src = imgOne.src;
-  imgElTwo.src = imgTwo.src;
-  imgElThree.src = imgThree.src;
+function renderImages() {
+  createRenderArray();
+  var imgOne = imgArray[renderArray[0]];
+  var imgTwo = imgArray[renderArray[1]];
+  var imgThree = imgArray[renderArray[2]];
 
   imgElOne.alt = imgOne.name;
+  imgElOne.src = imgOne.src;
+
   imgElTwo.alt = imgTwo.name;
+  imgElTwo.src = imgTwo.src;
+
   imgElThree.alt = imgThree.name;
+  imgElThree.src = imgThree.src;
 
   imgOne.viewed++;
   imgTwo.viewed++;
   imgThree.viewed++;
-
-  console.log('IMAGE ARRAY', imgArray);
 }
 
+function eventHandler(e) {
+  console.log(e.target.alt);
+  userClicks++;
 
-function randomNumber(max) {
-  console.log('in rando number');
-  return Math.floor(Math.random() * max); //excludes 7 becuase the array starts at 0 and goes through 6
+
+  for (var i = 0; i < imgArray.length; i++) {
+    if (imgArray[i].name === e.target.alt) {
+      imgArray[i].clicked++;
+    }
+  }
+  renderImages();
+
+  if (userClicks === clicksAlotted) {
+    imgElOne.removeEventListener('click', eventHandler);
+    imgElTwo.removeEventListener('click', eventHandler);
+    imgElThree.removeEventListener('click', eventHandler);
+
+    for (i = 0; i < imgArray.length; i++) {
+      var imageClickedAmount = document.createElement('p');
+      imageClickedAmount.textContent = `${imgArray[i].name}, clicked ${imgArray[i].clicked} times, viewed ${imgArray[i].viewed} times.`;
+      results.append(imageClickedAmount);
+    }
+  }
 }
 
 imgElOne.addEventListener('click', eventHandler);
 imgElTwo.addEventListener('click', eventHandler);
 imgElThree.addEventListener('click', eventHandler);
 
-// imgElOne.removeEventListener
-
-// Incriments Click of images
-function eventHandler(e) {
-  console.log('INSIDE EVENT HANDLER', e.target.alt);
-  for (var i = 0; i < imgArray.length; i++) {
-    console.log('INSIDE FOR LOOP', imgArray[i]);
-    if (imgArray[i].name === e.target.alt) {
-      imgArray[i].clicked++;
-      renderImages();
-    }
-  }
-}
-
 renderImages();
 
+// imgElOne.removeEventListener
+
+// // Incriments Click of images
+// function eventHandler(e) {
+//   console.log(e.target.alt);
+//   for (var i = 0; i < imgArray.length; i++) {
+//     console.log('INSIDE FOR LOOP', imgArray[i]);
+//     if (imgArray[i].name === e.target.alt) {
+//       imgArray[i].clicked++;
+//       renderImages();
+//     }
+//   }
+// }
+
+
+
+// function renderImages() {
+//   // DOM manipulation fill element with content
+//   var imgOne = imgArray[randomNumber(imgArray.length)];
+//   var imgTwo = imgArray[randomNumber(imgArray.length)];
+//   var imgThree = imgArray[randomNumber(imgArray.length)];
+
+//   while(imgOne === imgTwo) {
+//     imgTwo = imgArray[randomNumber(imgArray.length)];
+//   }
+
+//   imgElOne.src = imgOne.src;
+//   imgElTwo.src = imgTwo.src;
+//   imgElThree.src = imgThree.src;
+
+//   imgElOne.alt = imgOne.name;
+//   imgElTwo.alt = imgTwo.name;
+//   imgElThree.alt = imgThree.name;
+
+//   imgOne.viewed++;
+//   imgTwo.viewed++;
+//   imgThree.viewed++;
+
+//   console.log('IMAGE ARRAY', imgArray);
+// }

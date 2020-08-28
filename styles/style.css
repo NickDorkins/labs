@@ -1,6 +1,18 @@
 html {
-  background-color: orange;
+  background-color: grey;
 }
+
+header {
+  background-image: url("../img/london-street-phone-cabin-163037.jpeg");
+  height: 250px;
+  }
+
+canvas {
+  width: 960px;
+  height: auto;
+  margin: 0px auto;
+  background-color: lightgreen;
+  }
 
 img {
   height: 300px;
@@ -9,7 +21,6 @@ img {
 }
 #imageBlock {
   width: 970px;
-  background-color: blue;
   margin: 0px auto;
   margin-top: 50px;
 }

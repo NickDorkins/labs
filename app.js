@@ -10,7 +10,7 @@ var clicksAlotted = 25;
 var userClicks = 0;
 var renderArray = [];
 
-var results = document.getElementById('results');
+// var results = document.getElementById('results');
 
 // create Pictures
 
@@ -23,29 +23,33 @@ function Picture(name, src) {
   imgArray.push(this);
 }
 
-new Picture('R2D2 suitcase', './img/bag.jpg');
-new Picture('Banana Cutter', './img/banana.jpg');
-new Picture('tablet tp holder', './img/bathroom.jpg');
-new Picture('open toe rainboots', './img/boots.jpg');
-new Picture('all in one breakfast toaster', './img/breakfast.jpg');
-new Picture('meatball gum balls', './img/bubblegum.jpg');
-new Picture('domed seat chair', './img/chair.jpg');
-new Picture('cthulhu holding explorer', './img/cthulhu.jpg');
-new Picture('duck bill muzzle', './img/dog-duck.jpg');
-new Picture('canned dragon meat', './img/dragon.jpg');
-new Picture('utensil pen caps', './img/pen.jpg');
-new Picture('dog sweep shoes', './img/pet-sweep.jpg');
-new Picture('pizza scissors/server', './img/scissors.jpg');
-new Picture('shark eating human sleeping bag', './img/shark.jpg');
-new Picture('baby sweeper onesie', './img/sweep.png');
-new Picture('star wars tauntaun carcas sleeping bag', './img/tauntaun.jpg');
-new Picture('canned unicorn meat', './img/unicorn.jpg');
-new Picture('moving tenticle usb', './img/usb.gif');
-new Picture('self filling watering can', './img/water-can.jpg');
-new Picture('worst wine glass ever', './img/wine-glass.jpg');
+var getImages = localStorage.getItem('imgArray');
+if (getImages) {
+  imgArray = JSON.parse(getImages);
+} else {
+  new Picture('R2D2 suitcase', './img/bag.jpg');
+  new Picture('Banana Cutter', './img/banana.jpg');
+  new Picture('tablet tp holder', './img/bathroom.jpg');
+  new Picture('open toe rainboots', './img/boots.jpg');
+  new Picture('all in one breakfast toaster', './img/breakfast.jpg');
+  new Picture('meatball gum balls', './img/bubblegum.jpg');
+  new Picture('domed seat chair', './img/chair.jpg');
+  new Picture('cthulhu holding explorer', './img/cthulhu.jpg');
+  new Picture('duck bill muzzle', './img/dog-duck.jpg');
+  new Picture('canned dragon meat', './img/dragon.jpg');
+  new Picture('utensil pen caps', './img/pen.jpg');
+  new Picture('dog sweep shoes', './img/pet-sweep.jpg');
+  new Picture('pizza scissors/server', './img/scissors.jpg');
+  new Picture('shark eating human sleeping bag', './img/shark.jpg');
+  new Picture('baby sweeper onesie', './img/sweep.png');
+  new Picture('star wars tauntaun carcas sleeping bag', './img/tauntaun.jpg');
+  new Picture('canned unicorn meat', './img/unicorn.jpg');
+  new Picture('moving tenticle usb', './img/usb.gif');
+  new Picture('self filling watering can', './img/water-can.jpg');
+  new Picture('worst wine glass ever', './img/wine-glass.jpg');
+}
 
-
-console.log(imgArray);
+// console.log(imgArray);
 
 function randomNumber(max) {
   return Math.floor(Math.random() * max);
@@ -62,7 +66,7 @@ function createRenderArray() {
     }
     renderArray.push(i);
   }
-  console.log(renderArray);
+  // console.log(renderArray);
 }
 
 function renderImages() {
@@ -91,7 +95,7 @@ imgElThree.addEventListener('click', eventHandler);
 
 
 function eventHandler(e) {
-  console.log(e.target.alt);
+  // console.log(e.target.alt);
   userClicks++;
 
 
@@ -107,11 +111,9 @@ function eventHandler(e) {
     imgElTwo.removeEventListener('click', eventHandler);
     imgElThree.removeEventListener('click', eventHandler);
 
-    // for (i = 0; i < imgArray.length; i++) {
-    //   var imageClickedAmount = document.createElement('p');
-    //   imageClickedAmount.textContent = `${imgArray[i].name}, clicked ${imgArray[i].clicked} times, viewed ${imgArray[i].viewed} times.`;
-    //   results.append(imageClickedAmount);
-    // }
+    var stringifiedImgArray = JSON.stringify(imgArray);
+    localStorage.setItem('imgArray', stringifiedImgArray);
+
     renderChart();
   }
 }
@@ -128,7 +130,7 @@ function renderChart() {
   }
 
   var chartObject = {
-    type: 'bar',
+    type: 'horizontalBar',
     data: {
       labels: imageArray,
       datasets: [{
@@ -253,7 +255,5 @@ function renderChart() {
 
 renderImages();
 
-
-// renderChart();
 
 

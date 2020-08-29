@@ -85,6 +85,11 @@ function renderImages() {
   imgThree.viewed++;
 }
 
+imgElOne.addEventListener('click', eventHandler);
+imgElTwo.addEventListener('click', eventHandler);
+imgElThree.addEventListener('click', eventHandler);
+
+
 function eventHandler(e) {
   console.log(e.target.alt);
   userClicks++;
@@ -102,11 +107,12 @@ function eventHandler(e) {
     imgElTwo.removeEventListener('click', eventHandler);
     imgElThree.removeEventListener('click', eventHandler);
 
-    for (i = 0; i < imgArray.length; i++) {
-      var imageClickedAmount = document.createElement('p');
-      imageClickedAmount.textContent = `${imgArray[i].name}, clicked ${imgArray[i].clicked} times, viewed ${imgArray[i].viewed} times.`;
-      results.append(imageClickedAmount);
-    }
+    // for (i = 0; i < imgArray.length; i++) {
+    //   var imageClickedAmount = document.createElement('p');
+    //   imageClickedAmount.textContent = `${imgArray[i].name}, clicked ${imgArray[i].clicked} times, viewed ${imgArray[i].viewed} times.`;
+    //   results.append(imageClickedAmount);
+    // }
+    renderChart();
   }
 }
 
@@ -115,14 +121,14 @@ function renderChart() {
   var viewedArray = [];
   var imageArray = [];
 
-  for (var i = 0; i < imgArray.length; i++){
+  for (var i = 0; i < imgArray.length; i++) {
     clicksArray.push(imgArray[i].clicked);
     viewedArray.push(imgArray[i].viewed);
     imageArray.push(imgArray[i].name);
   }
 
   var chartObject = {
-    type: 'horizontalBar',
+    type: 'bar',
     data: {
       labels: imageArray,
       datasets: [{
@@ -186,6 +192,19 @@ function renderChart() {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)',
           'rgba(255, 99, 132, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(150, 206, 15, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(100, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+
           'rgba(54, 162, 235, 1)'
 
         ],
@@ -209,7 +228,6 @@ function renderChart() {
           'rgba(255, 99, 132, 1)',
           'rgba(100, 99, 132, 1)',
           'rgba(54, 162, 235, 1)',
-
           'rgba(255, 159, 64, 1)'
         ],
         hoverBackgroundColor: 'pink',
@@ -233,11 +251,9 @@ function renderChart() {
   var myChart = new Chart(ctx, chartObject); //eslint-disable-line
 }
 
-imgElOne.addEventListener('click', eventHandler);
-imgElTwo.addEventListener('click', eventHandler);
-imgElThree.addEventListener('click', eventHandler);
-
 renderImages();
-renderChart();
+
+
+// renderChart();
 
 
